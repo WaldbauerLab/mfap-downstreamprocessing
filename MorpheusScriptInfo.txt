@@ -1,0 +1,51 @@
+This script is designed to be run with manual user input and an environment
+such as Rgui, RStudio, or similar is suggested. It is not adapted for batch
+or command-line scripting.
+
+OVERVIEW:
+This script converts PSM results produduced by Morpheus From Another Place
+(MFAP) into protein-level results, with manual FDR control. The first half of
+the script takes PSM results (from the MFAP '.PSMs.tsv' output file), excludes
+spectra outside of the user-specified q-value range, and produces a plot of 
+q-value as a function of spectral index. The plot identifies 10 inflection points
+that can be used as cutoff points to further control for FDR. This plot allows
+the user to manually examine the data and consider tradeoffs between spectrum
+quality and quantity. 
+
+In the second part of the script, the user selects one of the 10 cutoff points 
+based on the plot, and inputs this as a number from 1 to 10. This is done by manually
+changing the value of the CutoffPoint variable. The script subsets the data to
+this cutoff, then compiles spectral results into protein-level ones. The script 
+also calculates protein-level statistics such as protein FDR and the number of 
+spectra for each protein. 
+
+For MIKE results, the key number is the log2 ratio of 18O/16O versions of
+a given peptide, which gives the relative abundance of that peptide between two
+samples. MFAP gives this number at the peptide level. The script converts this 
+to the protein level as the median of log2 (18O/16O) for all peptides of that
+protein. For error analysis the script also calculates the std deviation and
+std error (calculated as stdev/(#pepides/protein)^1/2). The script also calculates
+a normalized median log2 18O/16O to allow the user to compare between multiple runs.
+The normalization is done by subtracting the median of all protein-level log2 18O/16O
+ratios from the value for each protein.This corrects for spurious trends that 
+may accumulate. In high-quality, 1:1 mixed results, the normalization factor 
+should remain near 0.
+
+OUTPUT:  
+This script produces 4 files in the same directory as the input filename.
+filename_cutoff_info.tsv : text file. Spectral-level fdr info about plot
+	cutoff points. 
+filename_cutoff_plot.pdf : Pdf copy of the plot produced by the first half 
+	of script.
+filename_protein_output.tsv : Protein-level tab-delimited results file. 
+filename_summary.tsv : Summary information about the protein level data: 
+	# passed spectra, # proteins, protein-level fdrs,normalization factor
+
+
+NOTES/TROUBLESHOOTING: Make sure you have all required packages installed: 
+BioPhysConnectoR and plyr. Required user inputs are the filename and directory 
+where the MFAP .PSMs.tsv results file is stored, and the cutoff point for the second 
+half of the script.
+
+CREDITS: This was created by Daniel Muratore and Adriana Rizzo in 2016. For any issues
+contact Adriana Rizzo at adrizzo@uchicago.edu
