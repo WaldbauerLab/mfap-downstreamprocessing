@@ -1,9 +1,11 @@
-
+##########
+## The Arm: An R script for postprocessing of MIKE quantitative proteomics results from MorpheusFromAnotherPlace
+##########
 ## REQUIRED USER INPUTS 
 # Path to working directory where MFAP .PSMs.tsv file is located and output will be written
-workdir<-'D:/Orbitrap data/Jul2016_OneStep/Controls/MFAP_Results/Syn 9'
+workdir<-'D:/Path to/directory with/your data'
 # Name of MFAP-generated .PSMs.tsv file WITHOUT extensions
-filename<- 'Nov16-vSyn9-B16T3'
+filename<- 'datafile-name'
 # Maximum q-value (%) to consider for cutoff point
 top<-1.0
 # Minimum q-value (%) to consider for cutoff point
