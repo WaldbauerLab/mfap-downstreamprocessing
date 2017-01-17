@@ -24,10 +24,10 @@ a given peptide, which gives the relative abundance of that peptide between two
 samples. MFAP gives this number at the peptide level. The script converts this 
 to the protein level as the median of log2 (18O/16O) for all peptides of that
 protein. For error analysis the script also calculates the std deviation and
-std error (calculated as stdev/(#pepides/protein)^1/2). The script also calculates
+std error (calculated as stdev/(#peptides/protein)^1/2). The script also calculates
 a normalized median log2 18O/16O to allow the user to compare between multiple runs.
 The normalization is done by subtracting the median of all protein-level log2 18O/16O
-ratios from the value for each protein.This corrects for spurious trends that 
+ratios from the value for each protein. This corrects for spurious trends that 
 may accumulate. In high-quality, 1:1 mixed results, the normalization factor 
 should remain near 0.
 
@@ -39,7 +39,7 @@ filename_cutoff_plot.pdf : Pdf copy of the plot produced by the first half
 	of script.
 filename_protein_output.tsv : Protein-level tab-delimited results file. 
 filename_summary.tsv : Summary information about the protein level data: 
-	# passed spectra, # proteins, protein-level fdrs,normalization factor
+	# passed spectra, # proteins, protein-level fdrs, normalization factor
 
 
 NOTES/TROUBLESHOOTING: Make sure you have all required packages installed: 
